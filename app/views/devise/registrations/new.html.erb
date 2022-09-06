@@ -30,11 +30,12 @@
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
-
+  <p>Hint: The password should be at least eight characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & ).</p>
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
+  </p>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our http://brentmark-prod.square63.net//privacy-policy/.</p>
 
   <div class="actions">
     <%= f.submit "Sign up" %>

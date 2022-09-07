@@ -2,6 +2,7 @@
 
 # User_model
 class User < ApplicationRecord
+  attr_writer :login
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -14,9 +15,21 @@ class User < ApplicationRecord
   validate :password_contains_number
   validate :password_length
 
-  validates :email, :user_name, :first_name, :last_name, :password, presence: { strict: true }, on: :create
-
+  validates :email, :first_name, :last_name, :password, presence: { strict: true }, on: :create
+  validates :user_name, presence: true, uniqueness: { case_sensitive: false }
   validates :user_name, :email, uniqueness: true
+  validates_format_of :user_name, with: /^[a-zA-Z0-9]*$/, :multiline => true
+
+  validate :validate_username
+
+  def validate_username
+    if User.where(email: user_name).exists?
+      errors.add(:user_name, :invalid)
+    end
+  end
+  def login
+    @login || self.user_name || self.email
+  end
 
   def password_uppercase
     return unless password.match(/\p{Upper}/).nil?
@@ -48,5 +61,14 @@ class User < ApplicationRecord
     return if password.count('0-9').positive?
 
     errors.add :password, ' must contain at least one number'
+  end
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    if (login = conditions.delete(:login))
+      where(conditions.to_h).where(["lower(user_name) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    elsif conditions.has_key?(:user_name) || conditions.has_key?(:email)
+      where(conditions.to_h).first
+    end
   end
 end

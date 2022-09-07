@@ -6,6 +6,7 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
+
   config.cache_classes = false
 
   # Do not eager load code on boot.
@@ -67,8 +68,8 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    user_name: 'l191133@lhr.nu.edu.pk',
-    password: 'abdullah.fast.1133',
+    user_name: 'abdullah.has126@gmail.com',
+    password: 'ikurgxpobjegrlir',
     domain: 'gmail.com',
     address: 'smtp.gmail.com',
     port: '587',

@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+  <%= link_to "Sign out",  destroy_user_session_path, method: :delete %>
+  <% @users.each do |user| %>
+    <h2><%= user.user_name %></h2>
+    <br>
+    <%= link_to "Read User |", admin_user_path(user) %>
+    <%= link_to "Edit User |", edit_admin_user_path(user) %>
+    <%= link_to "Delete Post ", admin_user_path(user), method: :delete, data: {confirm: "Are you sure?"} %>
+  <% end %>
+<% else %>
+  <%= link_to "Log in",  new_user_session_path %>
+  <%= link_to "Sign Up",  new_user_registration_path %>  
+<% end %>

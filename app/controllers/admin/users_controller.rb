@@ -6,9 +6,9 @@ module Admin
     before_action :find_user, only: %i[show edit update destroy]
 
     def index
-      @users = User.all.order('created_at DESC')
+      @users = User.all.order('created_at DESC').page(params[:page])
 
-      @users = User.search_user(params[:search]) if params[:search].present?
+      @users = User.search_user(params[:search]).page(params[:page]) if params[:search].present?
     end
 
     def show; end

@@ -2,6 +2,7 @@
 
 # User_model
 class User < ApplicationRecord
+  paginates_per 2
   attr_writer :login
 
   # Include default devise modules. Others available are:

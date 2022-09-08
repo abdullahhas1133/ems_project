@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   validate :password_lower_case
   validate :password_uppercase
-  # validate :password_special_char
+  validate :password_special_char
   validate :password_contains_number
   # validate :password_length
 
@@ -31,6 +31,7 @@ class User < ApplicationRecord
     @login || user_name || email
   end
 
+  # Checks if the password contains an upper_case character
   def password_uppercase
     return unless password.match(/\p{Upper}/).nil?
 
@@ -43,20 +44,23 @@ class User < ApplicationRecord
   #   errors.add :password, ' password length must be atleast 8'
   # end
 
+  # Checks if the password contains a lower_case character
   def password_lower_case
     return unless password.match(/\p{Lower}/).nil?
 
     errors.add :password, ' must contain at least 1 lowercase '
   end
 
+  # Checks if the password contains a special character
   def password_special_char
-    special = "?<>',?[]}{=-)(*&^%$#`~{}!"
+    special = "?<>',?[]}{=-)(*&^%$#`~{}!@."
     regex = /[#{special.gsub(/./) { |char| "\\#{char}" }}]/
     return if password =~ regex
 
     errors.add :password, ' must contain special character'
   end
 
+  # Checks if the password contains an integer between 0 to 9
   def password_contains_number
     return if password.count('0-9').positive?
 

@@ -3,17 +3,13 @@
 module Admin
   # Users_controller
   class UsersController < ApplicationController
-    # before_action :authenticate_user!
-
-    # def authenticate_user!
-    #   # redirect_to '/login' unless current_user
-    # end
     before_action :find_user, only: %i[show edit update destroy]
-    # before_action :authorized, except: %i[index new create show]
 
     def index
       @users = User.all.order('created_at DESC')
     end
+
+    def show; end
 
     def new
       @user = User.new
@@ -28,6 +24,8 @@ module Admin
       end
     end
 
+    def edit; end
+
     def update
       if @user.update(user_params)
         redirect_to [:admin, @user]
@@ -37,13 +35,8 @@ module Admin
     end
 
     def destroy
-      @user.destroy
-      redirect_to new_user_session_path
+      redirect_to new_user_session_path if @user.destroy
     end
-
-    def show; end
-
-    def edit; end
 
     private
 

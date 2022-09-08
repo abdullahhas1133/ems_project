@@ -6,7 +6,9 @@ module Admin
     before_action :find_user, only: %i[show edit update destroy]
 
     def index
-      @users = User.all.order('created_at DESC')
+      @users = User.all.order('created_at DESC').page params[:page]
+
+      @users = User.search_user(params[:search]) if params[:search].present?
     end
 
     def show; end
@@ -17,11 +19,7 @@ module Admin
 
     def create
       @user = User.new(user_params)
-      if @user.save
-        redirect_to @user
-      else
-        render 'new'
-      end
+      redirect_to @user if @user.save
     end
 
     def edit; end

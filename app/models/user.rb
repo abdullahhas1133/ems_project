@@ -67,6 +67,7 @@ class User < ApplicationRecord
     errors.add :password, ' must contain at least one number'
   end
 
+  # Checks for username/email validation
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if (login = conditions.delete(:login))
@@ -75,5 +76,10 @@ class User < ApplicationRecord
     elsif conditions.key?(:user_name) || conditions.key?(:email)
       where(conditions.to_h).first
     end
+  end
+
+  def self.search_user(search)
+    User.where('cast(id as text) LIKE :value or lower(users.user_name) LIKE :value or lower(users.email) LIKE :value ',
+               value: "%#{search.downcase}%")
   end
 end

@@ -3,12 +3,13 @@
 module Admin
   # Users_controller
   class UsersController < ApplicationController
+    helper_method :sort_column, :sort_direction
+
     before_action :find_user, only: %i[show edit update destroy]
 
     def index
-      @users = User.all.order('created_at DESC').page(params[:page])
-
-      @users = User.search_user(params[:search]).page(params[:page]) if params[:search].present?
+      @search = params[:search] if params[:search].present?
+      @users = User.search_user(@search).order("#{sort_column}  #{sort_direction}").page(params[:page])
     end
 
     def show; end
@@ -48,6 +49,14 @@ module Admin
 
     def user_params
       params.require(:user).permit(:email, :password, :user_name, :first_name, :last_name)
+    end
+
+    def sort_column
+      User.column_names.include?(params[:sort]) ? params[:sort] : 'user_name'
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
     end
   end
 end

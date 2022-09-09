@@ -8,8 +8,12 @@ module Admin
     before_action :find_user, only: %i[show edit update destroy]
 
     def index
-      @search = params[:search] if params[:search].present?
-      @users = User.search_user(@search).order("#{sort_column}  #{sort_direction}").page(params[:page])
+      @users = User.search_user(params[:search]).order("#{sort_column}  #{sort_direction}").page(params[:page])
+
+      respond_to do |format|
+        format.html
+        format.csv { send_data UserExport::ExportService.new(User.all).to_csv, filename:"User-#{DateTime.current}.csv" }
+      end
     end
 
     def show; end

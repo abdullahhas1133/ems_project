@@ -4,15 +4,15 @@ module Admin
   # Users_controller
   class UsersController < ApplicationController
     helper_method :sort_column, :sort_direction
-
     before_action :find_user, only: %i[show edit update destroy]
+    before_action :indexing_user, only: %i[index]
 
     def index
-      @users = User.search_user(params[:search]).order("#{sort_column}  #{sort_direction}").page(params[:page])
-
       respond_to do |format|
         format.html
-        format.csv { send_data UserExport::ExportService.new(User.all).to_csv, filename:"User-#{DateTime.current}.csv" }
+        format.csv do
+          send_data ExportService::UserExport.new(User.all).to_csv, filename: "User-#{DateTime.current}.csv"
+        end
       end
     end
 
@@ -61,6 +61,10 @@ module Admin
 
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+    end
+
+    def indexing_user
+      @users = User.search_user(params[:search]).order("#{sort_column}  #{sort_direction}").page(params[:page])
     end
   end
 end

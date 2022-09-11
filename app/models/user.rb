@@ -9,7 +9,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable,
-         :confirmable, :validatable
+         :confirmable, :validatable, :validate_on_invite => true
 
   validate :password_lower_case
   validate :password_uppercase

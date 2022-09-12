@@ -79,7 +79,7 @@ class User < ApplicationRecord
     end
   end
 
-  def self.search_user(search)
+  def self.search(search)
     if search
       where('cast(id as text) LIKE :value or lower(users.user_name) LIKE :value or lower(users.email) LIKE :value ',
             value: "%#{search.downcase}%")

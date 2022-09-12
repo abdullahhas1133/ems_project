@@ -1,14 +1,29 @@
 # frozen_string_literal: true
 
 # class InvitationsController
-class InvitationsController < Devise::InvitationsController
-  before_action :configure_permitted_parameters
+class InvitationsController < ApplicationController
+  def new
+    @user = User.new
+  end
 
-  protected
+  def create
+    @user = User.new(user_params)
+    @user.user_name = "#{@user.first_name}#{@user.last_name}"
+    @password = @user.password
+    InviteMailer.send_invitation(@user, @password).deliver_later if @user.save
+  end
 
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:invite, keys: %i[email user_name password])
-    devise_parameter_sanitizer.permit(:accept_invitation,
-                                      keys: %i[email user_name password first_name last_name])
+  private
+
+  def find_user
+    @user = if params[:id].present?
+              User.find(params[:id])
+            else
+              User.new
+            end
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :password, :first_name, :last_name)
   end
 end

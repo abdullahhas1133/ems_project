@@ -1,0 +1,14 @@
+Welcome to localhost:3000.com <%= @user.user_name %>
+===============================================
+To access your portal account, please take note of the following username and temporary password
+
+Username or Email
+<%=@user.user_name%> or <%=@user.email%>
+<br>
+Temporary password
+<%=@user.password%>
+
+To login to the site, just follow this link: 
+<%=  new_user_session_url %>.
+<p><%= link_to "Log in", new_user_session_url %></p>
+Thanks for joining and have a great day!

@@ -1,5 +1,6 @@
 <% if user_signed_in? %>
   <%= link_to "Sign out",  destroy_user_session_path, method: :delete %>
+  <%= link_to "Invite User",new_invitation_path%>
   <hr>
   <%= link_to "Export CSV" , admin_users_path(format: :csv) %>
   <%= form_tag admin_users_path, method: :get do %>

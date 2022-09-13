@@ -11,8 +11,7 @@ module Admin
       respond_to do |format|
         format.html
         format.csv do
-          send_data ExportService::Coupon
-          Export.new(Coupon.all).to_csv, filename: "Coupon-#{DateTime.current}.csv"
+          send_data ExportService::CouponExport.new(Coupon.all).to_csv, filename: "Coupon-#{DateTime.current}.csv"
         end
       end
     end
@@ -25,7 +24,14 @@ module Admin
 
     def create
       @coupon = Coupon.new(coupon_params)
-      redirect_to admin_coupons_path if @coupon.save
+
+      ActiveRecord::Base.transaction do
+        @coupon.save!
+        @coupon.discount_for_products(params[:coupon][:products])
+        redirect_to admin_coupons_path if @coupon.save
+      rescue StandardError
+        render 'new'
+      end
     end
 
     def edit; end
@@ -53,7 +59,7 @@ module Admin
     end
 
     def coupon_params
-      params.require(:coupon).permit(:name, :value)
+      params.require(:coupon).permit(:name, :value, :products)
     end
 
     def sort_column

@@ -8,8 +8,8 @@ class Coupon < ApplicationRecord
 
   def self.search(search)
     if search
-      where('cast(id as text) LIKE :value or lower(coupons.name) LIKE :value or cast(coupons.value as text) LIKE :value ',
-            value: "%#{search.downcase}%")
+      where('cast(id as text) LIKE :value or lower(coupons.name) LIKE :value or
+            cast(coupons.value as text) LIKE :value', value: "%#{search.downcase}%")
     else
       all
     end

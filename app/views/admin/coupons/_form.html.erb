@@ -8,5 +8,11 @@
     <%= f.label :value %><br />
     <%= f.text_field :value, autofocus: true, autocomplete: "value" %>
   </div>
+
+  <div class="dropdown field mb-3 text-start">
+    <%= f.label :Select_Coupon, class: "form-label" %><br />
+    <%= f.select :products, options_for_select(Product.all.map {|key| [key.title.titleize, key.id]},), {}, multiple: true, class: "mx-2 form-select" %>
+  </div>
+  
   <%= f.submit %>
 <% end %>

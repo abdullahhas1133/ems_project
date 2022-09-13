@@ -23,10 +23,5 @@
     <%= f.label :Select_Category, class: "form-label" %><br />
     <%= f.select :category_id, options_for_select(Category.all.map {|key| [key.name.titleize, key.id]}), {}, class: "mx-2 form-select" %>
   </div>
-
-  <div class="dropdown field mb-3 text-start">
-    <%= f.label :Select_Coupon, class: "form-label" %><br />
-    <%= f.select :coupon_id, options_for_select(Coupon.all.map {|key| [key.value.titleize, key.id]}), {}, class: "mx-2 form-select" %>
-  </div>
   <%= f.submit %>
 <% end %>

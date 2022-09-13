@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
+    resources :products
   end
 
   resources :invitations, only: %i[new create]

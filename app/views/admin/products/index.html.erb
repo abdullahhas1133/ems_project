@@ -1,0 +1,39 @@
+<div class = "container">
+  <% if user_signed_in? %>
+    <%= form_tag admin_products_path, method: :get do %>
+      <%= search_field_tag :search, params[:search], placeholder: 'Search by name' %>
+      <%= submit_tag "search" %>
+    <% end %>
+    <div class="table-responsive-md">
+      <table class="table">
+        <caption>List of products</caption>
+        <thead class="table-dark">
+          <tr>
+            <th scope="col"><%= sort_list "id", "ID#"%></th>
+            <th scope="col"><%= sort_list "title", "Title" %></th>
+            <th scope="col"><%= sort_list "price", "Price" %></th>
+            <th scope="col"><%= sort_list "description", "Description" %></th>
+            <th scope="col"><%= sort_list "status", "Status" %></th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @products.each do |product| %>
+            <tr>
+              <th scope="row"><%= product.id %></th>
+              <td><%= product.title %></td>
+              <td><%= product.price %></td>
+              <td><%= product.description %></td>
+              <td><%= product.status %></td>
+              <td><%= link_to "View |", admin_product_path(product) %>
+                  <%= link_to "Edit |", edit_admin_product_path(product) %>
+                  <%= link_to "Delete ", admin_product_path(product), method: :delete, data: {confirm: "Are you sure?"} %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>  
+    </div> 
+    <%= paginate @products %>
+  <% end %>
+</div>

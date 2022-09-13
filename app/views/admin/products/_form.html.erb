@@ -6,21 +6,27 @@
 
   <div class="field">
     <%= f.label :price %><br />
-    <%= f.text_field :price, autofocus: true, autocomplete: "email" %>
+    <%= f.text_field :price, autofocus: true, autocomplete: "price" %>
   </div>
 
   <div class="field">
     <%= f.label :description %><br />
-    <%= f.text_field :description, autofocus: true, autocomplete: "email" %>
+    <%= f.text_field :description, autofocus: true, autocomplete: "description" %>
   </div>
 
   <div class="dropdown field mb-3 text-start">
     <%= f.label :Select_Status, class: "form-label" %><br />
     <%= f.select :status, options_for_select(Product.statuses.keys.to_a.map {|key| [key.titleize, key]}), {}, class: "mx-2 form-select" %>
   </div>
+
   <div class="dropdown field mb-3 text-start">
     <%= f.label :Select_Category, class: "form-label" %><br />
     <%= f.select :category_id, options_for_select(Category.all.map {|key| [key.name.titleize, key.id]}), {}, class: "mx-2 form-select" %>
+  </div>
+
+  <div class="dropdown field mb-3 text-start">
+    <%= f.label :Select_Coupon, class: "form-label" %><br />
+    <%= f.select :coupon_id, options_for_select(Coupon.all.map {|key| [key.value.titleize, key.id]}), {}, class: "mx-2 form-select" %>
   </div>
   <%= f.submit %>
 <% end %>

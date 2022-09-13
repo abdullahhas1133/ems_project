@@ -1,0 +1,37 @@
+<div class = "container">
+  <% if user_signed_in? %>
+    <%= link_to "Export CSV" , admin_coupons_path(format: :csv), class: "nav-link"  %>
+    <%= form_tag admin_products_path, method: :get do %>
+      <%= search_field_tag :search, params[:search], placeholder: 'Search by name' %>
+      <%= submit_tag "search" %>
+    <% end %>
+    <div class="table-responsive-md">
+      <table class="table">
+        <caption>List of Coupons</caption>
+        <thead class="table-dark">
+          <tr>
+            <th scope="col"><%= sort_list "id", "ID#"%></th>
+            <th scope="col"><%= sort_list "name", "Name" %></th>
+            <th scope="col"><%= sort_list "value", "Value" %></th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @coupons.each do |coupon| %>
+            <tr>
+              <th scope="row"><%= coupon.id %></th>
+              <td><%= coupon.name %></td>
+              <td><%= coupon.value %></td>
+              <td>
+                <%= link_to "View |", admin_coupon_path(coupon) %>
+                <%= link_to "Edit |", edit_admin_coupon_path(coupon) %>
+                <%= link_to "Delete ", admin_coupon_path(coupon), method: :delete, data: {confirm: "Are you sure?"} %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>  
+    </div> 
+    <%= paginate @coupons %>
+  <% end %>
+</div>

@@ -64,7 +64,7 @@ module Admin
     end
 
     def indexing_user
-      @users = User.search_user(params[:search]).order("#{sort_column}  #{sort_direction}").page(params[:page])
+      @users = User.search(params[:search]).order("#{sort_column}  #{sort_direction}").page(params[:page])
     end
   end
 end

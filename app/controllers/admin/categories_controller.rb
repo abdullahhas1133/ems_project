@@ -39,7 +39,6 @@ module Admin
     def find_category
       @category = if params[:id].present?
                     Category.find(params[:id])
-
                   else
                     Category.new
                   end

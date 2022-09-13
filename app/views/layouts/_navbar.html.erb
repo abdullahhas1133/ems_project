@@ -22,15 +22,7 @@
           <li class="nav-item">
             <%= link_to "New Product", new_admin_product_path,  class: "nav-link" %>
           </li>
-          <% if request.url == "http://localhost:3000/" %>
-            <li class="nav-item">  
-              <%= link_to "Export CSV" , admin_users_path(format: :csv),class: "nav-link"  %>
-            </li>
-          <% elsif request.url == "http://localhost:3000/admin/products"%>
-            <li class="nav-item">  
-              <%= link_to "Export CSV" , admin_products_path(format: :csv),class: "nav-link"  %>
-            </li>
-          <% end %>
+          
         <% else %>
           <li class="nav-item">
             <%= link_to "Log in",  new_user_session_path,  class: "nav-link"  %>

@@ -3,7 +3,10 @@
 # User_model
 class Product < ApplicationRecord
   paginates_per 2
+
   belongs_to :category
+  belongs_to :coupon
+
   enum status: %i[publish draft pending]
 
   def self.search(search)

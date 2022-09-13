@@ -24,7 +24,7 @@ module Admin
 
     def create
       @product = Product.new(product_params)
-      redirect_to admin_product_path if @product.save
+      redirect_to admin_products_path if @product.save
     end
 
     def edit; end
@@ -52,7 +52,7 @@ module Admin
     end
 
     def product_params
-      params.require(:product).permit(:title, :price, :description, :status)
+      params.require(:product).permit(:title, :price, :description, :status, :category_id)
     end
 
     def sort_column

@@ -1,0 +1,29 @@
+<div class = "container">
+  <% if user_signed_in? %>
+    <div class="table-responsive-md">
+      <table class="table">
+        <caption>List of categories</caption>
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">ID#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @categories.each do |category| %>
+            <tr>
+              <th scope="row"><%= category.id %></th>
+              <td><%= category.name %></td>
+              <td>
+                <%= link_to "View |", admin_category_path(category) %>
+                <%= link_to "Edit |", edit_admin_category_path(category) %>
+                <%= link_to "Delete ", admin_category_path(category), method: :delete, data: {confirm: "Are you sure?"} %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>  
+    </div> 
+  <% end %>
+</div>

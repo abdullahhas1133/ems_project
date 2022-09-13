@@ -15,8 +15,12 @@
   </div>
 
   <div class="dropdown field mb-3 text-start">
-      <%= f.label :Select_Status, class: "form-label" %><br />
-      <%= f.select :status, options_for_select(Product.statuses.keys.to_a.map {|key| [key.titleize, key]}), {}, class: "mx-2 form-select" %>
+    <%= f.label :Select_Status, class: "form-label" %><br />
+    <%= f.select :status, options_for_select(Product.statuses.keys.to_a.map {|key| [key.titleize, key]}), {}, class: "mx-2 form-select" %>
+  </div>
+  <div class="dropdown field mb-3 text-start">
+    <%= f.label :Select_Category, class: "form-label" %><br />
+    <%= f.select :category_id, options_for_select(Category.all.map {|key| [key.name.titleize, key.id]}), {}, class: "mx-2 form-select" %>
   </div>
   <%= f.submit %>
 <% end %>

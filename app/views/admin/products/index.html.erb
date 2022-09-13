@@ -26,9 +26,10 @@
               <td><%= product.price %></td>
               <td><%= product.description %></td>
               <td><%= product.status %></td>
-              <td><%= link_to "View |", admin_product_path(product) %>
-                  <%= link_to "Edit |", edit_admin_product_path(product) %>
-                  <%= link_to "Delete ", admin_product_path(product), method: :delete, data: {confirm: "Are you sure?"} %>
+              <td>
+                <%= link_to "View |", admin_product_path(product) %>
+                <%= link_to "Edit |", edit_admin_product_path(product) %>
+                <%= link_to "Delete ", admin_product_path(product), method: :delete, data: {confirm: "Are you sure?"} %>
               </td>
             </tr>
           <% end %>

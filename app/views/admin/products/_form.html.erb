@@ -1,0 +1,22 @@
+<%= form_for [:admin,@product] do |f| %>
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title, autofocus: true, autocomplete: "user_name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :price %><br />
+    <%= f.text_field :price, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="dropdown field mb-3 text-start">
+      <%= f.label :Select_Status, class: "form-label" %><br />
+      <%= f.select :status, options_for_select(Product.statuses.keys.to_a.map {|key| [key.titleize, key]}), {}, class: "mx-2 form-select" %>
+  </div>
+  <%= f.submit %>
+<% end %>

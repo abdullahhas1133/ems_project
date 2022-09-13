@@ -16,6 +16,12 @@
           <li class="nav-item">
             <%= link_to "Invite User",new_invitation_path,  class: "nav-link" %>
           </li>
+          <li class="nav-item">
+            <%= link_to "Products",admin_products_path,  class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "New Product", new_admin_product_path,  class: "nav-link" %>
+          </li>
           <% if request.url == "http://localhost:3000/"%>
             <li class="nav-item">  
               <%= link_to "Export CSV" , admin_users_path(format: :csv),class: "nav-link"  %>

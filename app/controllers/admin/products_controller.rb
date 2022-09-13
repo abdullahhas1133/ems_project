@@ -5,10 +5,9 @@ module Admin
   class ProductsController < ApplicationController
     helper_method :sort_column, :sort_direction
     before_action :find_product, only: %i[show edit update destroy]
-    # before_action :indexing_product, only: %i[index]
+    before_action :indexing_product, only: %i[index]
 
     def index
-      @products = Product.all.page(params[:page])
       respond_to do |format|
         format.html
         format.csv do
@@ -25,7 +24,7 @@ module Admin
 
     def create
       @product = Product.new(product_params)
-      redirect_to admin_products_path if @product.save
+      redirect_to admin_product_path if @product.save
     end
 
     def edit; end
@@ -65,7 +64,7 @@ module Admin
     end
 
     def indexing_product
-      @product = Product.search(params[:search]).order("#{sort_column}  #{sort_direction}").page(params[:page])
+      @products = Product.search(params[:search]).order("#{sort_column}  #{sort_direction}").page(params[:page])
     end
   end
 end

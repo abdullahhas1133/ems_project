@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     resources :coupons
   end
 
+  namespace :user do
+    resources :products
+  end
+
   resources :invitations, only: %i[new create]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

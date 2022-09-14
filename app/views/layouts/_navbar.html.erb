@@ -13,27 +13,34 @@
           <li class="nav-item">
             <%= link_to "Sign out",  destroy_user_session_path, method: :delete,  class: "nav-link" %>
           </li>
-          <li class="nav-item">
-            <%= link_to "Invite User",new_invitation_path,  class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Products",admin_products_path,  class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "New Product", new_admin_product_path,  class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Categories",admin_categories_path,  class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "New Category",new_admin_category_path,  class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Coupons",admin_coupons_path,  class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Add Coupon",new_admin_coupon_path,  class: "nav-link" %>
-          </li>
+          
+          <% if current_user.admin? %>
+            <li class="nav-item">
+              <%= link_to "Invite User",new_invitation_path,  class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Products",admin_products_path,  class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "New Product", new_admin_product_path,  class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Categories",admin_categories_path,  class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "New Category",new_admin_category_path,  class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Coupons",admin_coupons_path,  class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Add Coupon",new_admin_coupon_path,  class: "nav-link" %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "Products",user_products_path,  class: "nav-link" %>
+            </li>
+          <% end %>
         <% else %>
           <li class="nav-item">
             <%= link_to "Log in",  new_user_session_path,  class: "nav-link"  %>

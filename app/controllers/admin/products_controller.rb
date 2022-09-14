@@ -44,11 +44,7 @@ module Admin
     private
 
     def find_product
-      @product = if params[:id].present?
-                   Product.find(params[:id])
-                 else
-                   Product.new
-                 end
+      @product = (Product.find(params[:id]) if params[:id].present?)
     end
 
     def product_params

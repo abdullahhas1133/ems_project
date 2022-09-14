@@ -24,11 +24,10 @@ module Admin
 
     def create
       @coupon = Coupon.new(coupon_params)
-
       ActiveRecord::Base.transaction do
         @coupon.save!
-        @coupon.discount_for_products(params[:coupon][:products])
-        redirect_to admin_coupons_path if @coupon.save
+        @coupon.product_coupon(params[:coupon][:products])
+        redirect_to admin_coupons_path
       rescue StandardError
         render 'new'
       end
@@ -51,11 +50,7 @@ module Admin
     private
 
     def find_coupon
-      @coupon = if params[:id].present?
-                  Coupon.find(params[:id])
-                else
-                  Coupon.new
-                end
+      @coupon = (Coupon.find(params[:id]) if params[:id].present?)
     end
 
     def coupon_params

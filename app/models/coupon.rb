@@ -2,7 +2,7 @@
 
 # Coupon_model
 class Coupon < ApplicationRecord
-  paginates_per 2
+  paginates_per 4
 
   has_many :products, dependent: :destroy
 
@@ -13,5 +13,10 @@ class Coupon < ApplicationRecord
     else
       all
     end
+  end
+
+  def product_coupon(product_ids)
+    product_ids = product_ids.drop(1)
+    Product.where(id: product_ids).update_all(coupon_id: id)
   end
 end

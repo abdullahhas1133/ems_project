@@ -1,0 +1,19 @@
+<div class = "container">
+  <% if user_signed_in? %>
+    <div class='d-flex flex-wrap justify-content-around'>
+      <% @products.each do |product| %>
+        <div class="card my-2 text-white bg-dark" style="width: 18rem;">
+          <%= image_tag product.image, class: 'card-img-top' if product.image.attached? %>
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <h5 class="card-title"><%= product.title %></h5>
+              <p>Price: <%= product.price %></p>
+            </div>
+            <p class="card-text"><%= product.description %></p>
+            <div class="card-footer"></div>
+          </div>
+        </div>
+      <% end %>
+    </div> 
+  <% end %>
+</div>

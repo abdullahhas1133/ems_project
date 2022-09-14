@@ -63,6 +63,7 @@ gem 'rubocop-rails', require: false
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'bootstrap', '~> 5.2.0'
 gem 'devise'
+gem 'image_processing', '>= 1.2'
 gem 'jquery-rails'
 gem 'kaminari'
 gem 'letter_opener', group: :development

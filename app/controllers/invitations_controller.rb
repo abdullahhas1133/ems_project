@@ -16,11 +16,7 @@ class InvitationsController < ApplicationController
   private
 
   def find_user
-    @user = if params[:id].present?
-              User.find(params[:id])
-            else
-              User.new
-            end
+    @user = (User.find(params[:id]) if params[:id].present?)
   end
 
   def user_params

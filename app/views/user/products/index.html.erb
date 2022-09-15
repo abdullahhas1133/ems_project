@@ -10,7 +10,11 @@
               <p>Price: <%= product.price %></p>
             </div>
             <p class="card-text"><%= product.description %></p>
-            <div class="card-footer"></div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary btn-block mb-4">
+                <%= button_to "Add to cart", user_order_items_path(product_id: product.id) %>
+              </button>
+            </div>
           </div>
         </div>
       <% end %>

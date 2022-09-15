@@ -5,6 +5,7 @@ class User < ApplicationRecord
   paginates_per 2
   attr_writer :login
 
+  has_one :cart
   enum role: %i[client admin]
 
   # Include default devise modules. Others available are:
@@ -19,7 +20,7 @@ class User < ApplicationRecord
   validate :password_contains_number
   # validate :password_length
 
-  validates :email, :first_name, :last_name, :password, presence: { strict: true }, on: :create
+  validates :email, :first_name, :last_name, :password, presence: true, on: :create
   validates :user_name, presence: true, uniqueness: { case_sensitive: false }
   validates :user_name, :email, uniqueness: true
   validates_format_of :user_name, with: /^[a-zA-Z0-9]*$/, multiline: true

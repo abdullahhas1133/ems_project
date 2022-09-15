@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class User
-  # Products_controller
   class ProductsController < ApplicationController
+    before_action :current_cart
+
     def index
       @products = Product.all
     end

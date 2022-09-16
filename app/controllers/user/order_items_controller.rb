@@ -34,6 +34,14 @@ class User
 
     private
 
+    def current_order
+      if session[:order_id].nil?
+        Order.new
+      else
+        @order.find(session[:order_id])
+      end
+    end
+
     def order_item_params
       params.require(:order_item).permit(:quantity, :product_id, :cart_id, :order_id)
     end

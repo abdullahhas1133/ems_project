@@ -14,6 +14,8 @@ class User
     end
 
     def new
+      value = Coupon.validate_coupon(params[:coupon]) if params[:coupon].present?
+      @coupon = @current_cart.sub_total.to_i - value.to_i
       @order = Order.new
     end
 
@@ -21,17 +23,14 @@ class User
       @order = Order.new(order_params)
       @current_cart.order_items.each do |item|
         @order.order_items << item
-        item.cart_id = nil
       end
-      @order.save
-      @current_cart.empty
       redirect_to root_path
     end
 
     private
 
     def order_params
-      params.require(:order).permit(:firstname, :lastname, :email, :address)
+      params.require(:order).permit(:first_name, :last_name, :email, :address, :payment)
     end
   end
 end

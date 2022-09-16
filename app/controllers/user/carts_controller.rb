@@ -15,15 +15,5 @@ class User
       session[:cart_id] = nil
       redirect_to root_path
     end
-
-    def coupon
-      value = 0
-      value = Coupon.validate_coupon(params[:cart][:coupon]) if params[:cart][:coupon].present?
-      # if params[:cart][:coupon].present? & value ==0
-      #   flash.now[:notice] = "Invalid Coupon."
-      # end
-      current_cart.update_attributes(total: current_cart.sub_total - value)
-      redirect_to user_cart_path(current_cart)
-    end
   end
 end

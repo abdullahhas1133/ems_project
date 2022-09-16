@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   post 'order_items/:id/add' => 'order_items#add_quantity', as: 'order_item_add'
   post 'order_items/:id/reduce' => 'order_items#reduce_quantity', as: 'order_item_reduce'
 
-  post 'user/carts/coupon' => 'user/carts#coupon', as: 'carts_coupon'
+  post 'user/orders/coupon' => 'user/orders#coupon', as: 'orders_coupon'
 
   resources :invitations, only: %i[new create]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

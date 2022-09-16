@@ -19,4 +19,8 @@ class Coupon < ApplicationRecord
     product_ids = product_ids.drop(1)
     Product.where(id: product_ids).update_all(coupon_id: id)
   end
+
+  def self.validate_coupon(coupon)
+    Coupon.find_by(name: coupon).present? ? Coupon.find_by(name: coupon).value : 0
+  end
 end

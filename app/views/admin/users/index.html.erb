@@ -1,5 +1,5 @@
 <div class = "container">
-  <% if user_signed_in? %>            
+  <% if user_signed_in? %>       
     <%= link_to "Export CSV" , admin_users_path(format: :csv), class: "nav-link"  %>
     <%= form_tag admin_users_path, method: :get do %>
       <%= search_field_tag :search, params[:search], placeholder: 'Search by name' %>
@@ -10,7 +10,7 @@
         <caption>List of users</caption>
         <thead class="table-dark">
           <tr>
-            <th scope="col"><%= sort_list "id", "ID#"%></th>
+            <th scope="col"><%= sort_list "id", "ID#" %></th>
             <th scope="col"><%= sort_list "user_name", "User name" %></th>
             <th scope="col"><%= sort_list "email", "Email" %></th>
             <th scope="col"><%= sort_list "first_name", "First name" %></th>
@@ -29,9 +29,27 @@
               <td>
                 <%= link_to "Read User |", admin_user_path(user) %>
                 <%= link_to "Edit User |", edit_admin_user_path(user) %>
-                <%= link_to "Delete Post ", admin_user_path(user), method: :delete, data: {confirm: "Are you sure?"} %>
+                <a type="button" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal<%= user.id %>">
+                Delete User</a>
               </td>
             </tr>
+            <div class="modal fade" id="exampleModal<%= user.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" data-id id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure to want delete "<%= user.user_name %>"
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <%= link_to "Yes", admin_user_path(user), method: :delete, data: {dismiss: "modal"}, class: "btn btn-primary" %>
+                  </div>
+                </div>
+              </div>
+            </div>
           <% end %>
         </tbody>
       </table>  

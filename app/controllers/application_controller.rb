@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   private
 
   def current_cart
-    @current_cart = Cart.find_by(user_id: current_user.id)
+    @current_cart = current_user.cart
   end
 end

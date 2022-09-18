@@ -2,7 +2,8 @@
 
 # User_model
 class User < ApplicationRecord
-  paginates_per 2
+  paginates_per 5
+
   attr_writer :login
 
   has_one :cart

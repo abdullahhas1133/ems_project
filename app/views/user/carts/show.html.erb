@@ -4,10 +4,6 @@
     <li>Item: <%= order_item.product.title%>/ Price: <%= number_to_currency(order_item.product.price) %>/ Quantity: <%= order_item.quantity %>/ Total Price: <%= number_to_currency(order_item.total_price) %>
     <ul>
       <li>
-        <%= link_to "Add one", order_item_add_path(id: order_item), method: :post %>
-        <%= link_to "Reduce one", order_item_reduce_path(id: order_item), method: :post %>
-      </li>
-      <li>
         <%= link_to "Remove item", user_order_item_path(order_item), method: :delete %>
       </li>
     </ul>

@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     @current_cart = current_user.cart
   end
 
-  def after_sign_in_path(_resoucrce)
+  def after_sign_in_path_for(_resource)
     current_user.admin? ? admin_users_path : user_products_path
   end
 end

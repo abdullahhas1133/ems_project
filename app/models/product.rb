@@ -6,6 +6,7 @@ class Product < ApplicationRecord
 
   belongs_to :category
   belongs_to :coupon, optional: true
+  has_many :order_items, dependent: :destroy
 
   has_one_attached :image
   enum status: %i[publish draft pending]

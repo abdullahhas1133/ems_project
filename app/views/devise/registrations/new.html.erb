@@ -34,7 +34,7 @@
                   <%= f.label :password, class:"form-label" %>
                   <% if @minimum_password_length %>
                   <em>(<%= @minimum_password_length %> characters minimum)</em>
-                  <% end %><br />
+                  <% end %><div class="mb-2 mt-2"></div>
                   <%= f.password_field :password, autocomplete: "new-password",required: true, class: "form-control form-control-lg" %>
                 </div>
 
@@ -48,10 +48,10 @@
                 <p class="small mb-5 pb-lg-2">Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our http://brentmark-prod.square63.net//privacy-policy/.
                 </p>
 
-                <div class="actions">
+                <div class="actions mb-4 mt-2">
                   <%= f.submit "Sign Up" %>
                 </div>
-                <br>
+                
               <% end %>
               <%= render "devise/shared/links", class: "btn btn-outline-light btn-lg px-5" %>
             </div>

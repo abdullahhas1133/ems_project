@@ -1,7 +1,7 @@
 <%= form_for [:admin,@category] do |f| %>
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    <%= f.text_field :name, autofocus: true, required: true ,autocomplete: "name" %>
   </div>
   
   <%= f.submit %>

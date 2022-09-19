@@ -3,7 +3,7 @@
 # Coupon_model
 class Coupon < ApplicationRecord
   paginates_per 4
-  validate :name, :price, presence: true
+  validates :name, :value, presence: true
   has_many :products, dependent: :destroy
 
   def self.search(search)

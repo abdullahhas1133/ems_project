@@ -1,12 +1,12 @@
 <%= form_for [:admin,@product] do |f| %>
   <div class="field">
     <%= f.label :title %><br />
-    <%= f.text_field :title, autofocus: true, autocomplete: "user_name" %>
+    <%= f.text_field :title, required:true, autofocus: true, autocomplete: "user_name" %>
   </div>
 
   <div class="field">
     <%= f.label :price %><br />
-    <%= f.text_field :price, autofocus: true, autocomplete: "price" %>
+    <%= f.text_field :price, required:true, autofocus: true, autocomplete: "price" %>
   </div>
 
   <div class="field">
@@ -16,16 +16,16 @@
 
   <div class="dropdown field mb-3 text-start">
     <%= f.label :Select_Status, class: "form-label" %><br />
-    <%= f.select :status, options_for_select(Product.statuses.keys.to_a.map {|key| [key.titleize, key]}), {}, class: "mx-2 form-select" %>
+    <%= f.select :status, options_for_select(Product.statuses.keys.to_a.map {|key| [key.titleize, key]}), {}, class: "mx-2 form-select", required:true %>
   </div>
 
   <div class="dropdown field mb-3 text-start">
     <%= f.label :Select_Category, class: "form-label" %><br />
-    <%= f.select :category_id, options_for_select(Category.all.map {|key| [key.name.titleize, key.id]}), {}, class: "mx-2 form-select" %>
+    <%= f.select :category_id, options_for_select(Category.all.map {|key| [key.name.titleize, key.id]}), {}, class: "mx-2 form-select", required:true %>
   </div>
   <div class="field">
     <%= f.label :image %><br />
-    <%= f.file_field :image, autofocus: true%>
+    <%= f.file_field :image, required:true, autofocus: true%>
   </div>
   <%= f.submit %>
 <% end %>

@@ -23,7 +23,7 @@ class Coupon < ApplicationRecord
   def self.validate_coupon(coupon, cart)
     value = Coupon.find_by(name: coupon).present? ? Coupon.find_by(name: coupon).value : 0
 
-    if value.postive?
+    if value.positive?
       count = cart.products.where('coupon_id = ?', Coupon.find_by(name: coupon).id).count
       value *= count
     end

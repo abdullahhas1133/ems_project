@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
   def current_cart
     @current_cart = current_user.cart
   end
+
+  def after_sign_in_path(_resoucrce)
+    current_user.admin? ? admin_users_path : user_products_path
+  end
 end

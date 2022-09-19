@@ -5,7 +5,6 @@ module Admin
   class UsersController < ApplicationController
     helper_method :sort_column, :sort_direction
     before_action :find_user, only: %i[show edit update destroy]
-    before_action :check_user, only: %i[index]
     before_action :indexing_user, only: %i[index]
 
     def index
@@ -58,16 +57,6 @@ module Admin
 
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
-    end
-
-    def check_user
-      return unless user_signed_in?
-
-      if current_user.admin?
-        redirect_to admin_users_path
-      else
-        redirect_to user_products_path
-      end
     end
 
     def indexing_user

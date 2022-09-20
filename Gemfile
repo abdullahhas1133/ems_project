@@ -64,6 +64,7 @@ gem 'rubocop-rails', require: false
 gem 'bootstrap', '~> 5.2.0'
 gem 'devise'
 gem 'image_processing', '>= 1.2'
+gem 'interactor-rails', '~> 2.0'
 gem 'jquery-rails'
 gem 'kaminari'
 gem 'letter_opener', group: :development

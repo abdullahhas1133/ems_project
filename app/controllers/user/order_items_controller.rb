@@ -31,7 +31,7 @@ class User
     private
 
     def current_order
-      if session[:order_id].nil?
+      if session[:order_id].nil? || current_order.nil?
         Order.new
       else
         @order.find(session[:order_id])

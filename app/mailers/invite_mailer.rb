@@ -7,7 +7,6 @@ class InviteMailer < ApplicationMailer
   def send_invitation(user, password)
     @user = user
     @password = password
-
     mail(to: @user.email, subject: 'Invi')
   end
 end

@@ -29,9 +29,9 @@
                   <% if @minimum_password_length %>
                   <em>(<%= @minimum_password_length %> characters minimum)</em>
                   <% end %><br />
-                  <%= f.password_field :password, autocomplete: "new-password",required: true, class: "form-control form-control-lg" %>
+                  <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-lg" %>
                 </div>
-
+                
                 <div class="actions">
                   <%= f.submit "Invite" %>
                 </div>

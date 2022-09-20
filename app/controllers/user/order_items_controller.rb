@@ -8,22 +8,18 @@ class User
 
     def create
       # Find associated product and current cart
-      chosen_product = Product.find(params[:product_id])
-      current_cart = @current_cart
-      if current_cart.products.include?(chosen_product)
-        # Find the order_item with the chosen_product
-        @order_item = current_cart.order_items.find_by(product_id: chosen_product)
-        # Iterate the order_item's quantity by one
-        @order_item.quantity += 1
+
+      result = CreateOrderItems.call(
+        product_id: params[:product_id],
+        current_cart: @current_cart,
+        current_order: current_order,
+      )
+      @order_item = result.order_item
+      if result.success?
+        redirect_to user_cart_path(@current_cart)
       else
-        @order_item = OrderItem.new
-        @order_item.cart = current_cart
-        @order_item.product = chosen_product
-        @order_item.order = current_order
+        redirect_to user_products_path, alert: 'Error: Could not save to cart'
       end
-      # Save and redirect to cart show path
-      @order_item.save
-      redirect_to user_cart_path(current_cart)
     end
 
     def destroy
@@ -35,7 +31,7 @@ class User
     private
 
     def current_order
-      if session[:order_id].nil?
+      if session[:order_id].nil? || current_order.nil?
         Order.new
       else
         @order.find(session[:order_id])

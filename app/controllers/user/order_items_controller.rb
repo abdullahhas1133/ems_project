@@ -18,7 +18,7 @@ class User
       if result.success?
         redirect_to user_cart_path(@current_cart)
       else
-        redirect_to user_products_path, alert: 'Error: Something went wrong'
+        redirect_to user_products_path, alert: 'Error: Could not save to cart'
       end
     end
 

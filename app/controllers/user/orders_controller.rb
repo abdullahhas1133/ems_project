@@ -24,13 +24,15 @@ class User
       @current_cart.order_items.each do |item|
         @order.order_items << item
       end
+      @order.user_id = current_user.id
+      @order.save
       redirect_to root_path
     end
 
     private
 
     def order_params
-      params.require(:order).permit(:first_name, :last_name, :email, :address, :payment)
+      params.require(:order).permit(:first_name, :last_name, :email, :address, :payment, :user_id)
     end
   end
 end

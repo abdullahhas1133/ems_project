@@ -12,6 +12,7 @@ class User < ApplicationRecord
 
   attr_writer :login
 
+  has_one :order
   has_one :cart
   enum role: %i[client admin]
 

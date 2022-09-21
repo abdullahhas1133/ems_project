@@ -2,10 +2,10 @@
   <% if user_signed_in? %>
     <%= link_to "Export CSV" , admin_coupons_path(format: :csv), class: "nav-link"  %>
     <%= form_tag admin_coupons_path, method: :get do %>
-      <%= search_field_tag :search, params[:search], placeholder: 'Search by name' %>
-      <%= submit_tag "search" %>
+      <%= search_field_tag :search, params[:search], placeholder: 'Search by name'%>
+      <%= submit_tag "search"%>
     <% end %>
-    <div class="table-responsive-md">
+    <div class="table-responsive-md mt-2">
       <table class="table">
         <caption>List of Coupons</caption>
         <thead class="table-dark">

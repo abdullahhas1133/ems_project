@@ -38,7 +38,7 @@ class User < ApplicationRecord
 
   # Checks if the password contains an upper_case character
   def password_uppercase
-    return unless password.match(/\p{Upper}/).nil?
+    return unless password&.match(/\p{Upper}/).nil?
 
     errors.add :password, ' must contain at least 1 uppercase '
   end
@@ -51,7 +51,7 @@ class User < ApplicationRecord
 
   # Checks if the password contains a lower_case character
   def password_lower_case
-    return unless password.match(/\p{Lower}/).nil?
+    return unless password&.match(/\p{Lower}/).nil?
 
     errors.add :password, ' must contain at least 1 lowercase '
   end
@@ -67,7 +67,7 @@ class User < ApplicationRecord
 
   # Checks if the password contains an integer between 0 to 9
   def password_contains_number
-    return if password.count('0-9').positive?
+    return if password&.count('0-9')&.positive?
 
     errors.add :password, ' must contain at least one number'
   end

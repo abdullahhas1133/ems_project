@@ -1,31 +1,48 @@
-<%= form_for [:admin,@product] do |f| %>
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title, required:true, autofocus: true, autocomplete: "user_name" %>
-  </div>
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-80">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+            <div class="mb-md-5 mt-md-4 pb-5">
+              <%= form_for [:admin,@product] do |f| %>
+                <div class="form-outline form-white mb-4">
+                  <%= f.label :title, class: "form-label mb-4" %>
+                  <%= f.text_field :title, required:true, autofocus: true, autocomplete: "user_name", class: "form-control form-control-lg" %>
+                </div>
 
-  <div class="field">
-    <%= f.label :price %><br />
-    <%= f.text_field :price, required:true, autofocus: true, autocomplete: "price" %>
-  </div>
+                <div class="form-outline form-white mb-4">
+                  <%= f.label :price, class: "form-label mb-4" %>
+                  <%= f.text_field :price, required:true, autofocus: true, autocomplete: "price", class: "form-control form-control-lg" %>
+                </div>
 
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description, autofocus: true, autocomplete: "description" %>
-  </div>
+                <div class= "form-outline form-white mb-4">
+                  <%= f.label :description, class: "form-label mb-4" %>
+                  <%= f.text_field :description, autofocus: true, autocomplete: "description", class: "form-control form-control-lg" %>
+                </div>
 
-  <div class="dropdown field mb-3 text-start">
-    <%= f.label :Select_Status, class: "form-label" %><br />
-    <%= f.select :status, options_for_select(Product.statuses.keys.to_a.map {|key| [key.titleize, key]}), {}, class: "mx-2 form-select", required:true %>
-  </div>
+                <div class="dropdown field mb-3">
+                  <%= f.label :Select_Status, class: "form-label mb-4" %>
+                  <%= f.select :status, options_for_select(Product.statuses.keys.to_a.map {|key| [key.titleize, key]}), {}, class: "mx-2 form-select", required:true, class: "form-control form-control-lg" %>
+                </div>
 
-  <div class="dropdown field mb-3 text-start">
-    <%= f.label :Select_Category, class: "form-label" %><br />
-    <%= f.select :category_id, options_for_select(Category.all.map {|key| [key.name.titleize, key.id]}), {}, class: "mx-2 form-select", required:true %>
+                <div class="dropdown field mb-3">
+                  <%= f.label :Select_Category, class: "form-label mb-4"%>
+                  <%= f.select :category_id, options_for_select(Category.all.map {|key| [key.name.titleize, key.id]}), {}, class: "mx-2 form-select", required:true, class: "form-control form-control-lg" %>
+                </div>
+                <div class="form-outline form-white mb-4">
+                  <%= f.label :image, class: "form-label mb-4" %>
+                  <%= f.file_field :image, required:true, autofocus: true, class: "form-control form-control-lg"%>
+                </div>
+
+                <div class="actions mb-4 mt-2">
+                  <%= f.submit "Create" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :image %><br />
-    <%= f.file_field :image, required:true, autofocus: true%>
-  </div>
-  <%= f.submit %>
-<% end %>
+</section>

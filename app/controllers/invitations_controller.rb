@@ -10,7 +10,11 @@ class InvitationsController < ApplicationController
     @user = User.new(user_params)
     @user.user_name = "#{@user.first_name}#{@user.last_name}"
     @password = @user.password
-    InviteMailer.send_invitation(@user, @password).deliver_later if @user.save
+    if @user.save
+      InviteMailer.send_invitation(@user, @password).deliver_later
+    else
+      redirect_to new_invitation_url
+    end
   end
 
   private

@@ -20,11 +20,11 @@ class User
     end
 
     def create
-      @order = Order.new(order_params)
+      @order = current_user.order
+      @order.update(order_params)
       @current_cart.order_items.each do |item|
         @order.order_items << item
       end
-      @order.user_id = current_user.id
       @order.save
       redirect_to root_path
     end

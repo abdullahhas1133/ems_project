@@ -31,7 +31,10 @@ class User
     private
 
     def current_order
-      Order.find_or_create_by(user_id: params[:id])
+      return unless current_user.order.nil?
+
+      @order = current_user.build_order
+      @order.save(valdidate: false)
     end
 
     def order_item_params

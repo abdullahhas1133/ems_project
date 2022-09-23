@@ -6,6 +6,7 @@ class Cart < ApplicationRecord
   has_many :products, through: :order_items
   belongs_to :user
 
+  # calculates total for the cart
   def sub_total
     sum = 0
     order_items.each do |order_item|

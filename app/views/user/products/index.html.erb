@@ -2,8 +2,8 @@
   <% if user_signed_in? %>
     <div class='d-flex flex-wrap justify-content-around'>
       <% @products.each do |product| %>
-        <div class="card my-2 text-white bg-dark" style="width: 18rem;">
-          <%= image_tag product.image, class: 'card-img-top' if product.image.attached? %>
+        <div class="card my-2 text-white bg-dark" style='width:301px'>
+          <%= image_tag product.image, style:'width:300px;height:250px;object-fit:cover;', class: 'card-img-top' if product.image.attached? %>
           <div class="card-body">
             <div class="d-flex justify-content-between">
               <h5 class="card-title"><%= product.title %></h5>
@@ -11,9 +11,7 @@
             </div>
             <p class="card-text"><%= product.description %></p>
             <div class="card-footer">
-              <button type="submit" class="btn btn-primary btn-block mb-4">
-                <%= button_to "Add to cart", user_order_items_path(product_id: product.id) %>
-              </button>
+              <%= link_to "Add to cart", user_order_items_path(product_id: product.id), method: 'POST', class:"btn btn-primary w-100" %>
             </div>
           </div>
         </div>

@@ -12,7 +12,6 @@ class User
       result = CreateOrderItems.call(
         product_id: params[:product_id],
         current_cart: @current_cart,
-        current_order: current_order,
       )
       @order_item = result.order_item
       if result.success?
@@ -29,13 +28,6 @@ class User
     end
 
     private
-
-    def current_order
-      return unless current_user.order.nil?
-
-      @order = current_user.build_order
-      @order.save(valdidate: false)
-    end
 
     def order_item_params
       params.require(:order_item).permit(:quantity, :product_id, :cart_id, :order_id)

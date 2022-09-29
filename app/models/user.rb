@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   attr_writer :login
 
-  has_many :orders, dependent: :destroy
+  has_many :orders, dependent: :nullify
   has_one :cart
   enum role: %i[client admin]
 

@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   attr_writer :login
 
-  has_one :order
+  has_many :orders, dependent: :nullify
   has_one :cart
   enum role: %i[client admin]
 
@@ -20,7 +20,6 @@ class User < ApplicationRecord
   validate :password_uppercase
   validate :password_special_char
   validate :password_contains_number
-  # validate :password_length
 
   validates :email, :first_name, :last_name, :password, presence: true, on: :create
   validates :user_name, presence: true, uniqueness: { case_sensitive: false }
@@ -44,13 +43,6 @@ class User < ApplicationRecord
     errors.add :password, ' must contain at least 1 uppercase '
   end
 
-  # def password_length
-  #   return if password.length >= 8
-
-  #   errors.add :password, ' password length must be atleast 8'
-  # end
-
-  # Checks if the password contains a lower_case character
   def password_lower_case
     return unless password&.match(/\p{Lower}/).nil?
 
@@ -84,6 +76,7 @@ class User < ApplicationRecord
     end
   end
 
+  # Search input for all attributes
   def self.search(search)
     if search
       where('cast(id as text) LIKE :value or lower(users.user_name) LIKE :value or lower(users.email) LIKE :value ',

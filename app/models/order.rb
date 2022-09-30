@@ -5,5 +5,6 @@ class Order < ApplicationRecord
   has_many :order_items, dependent: :destroy
   belongs_to :user
   enum payment: %i[cash card]
-  validates :first_name, :last_name, :email, :address, presence: true
+  enum status: %i[pending complete]
+  validates :first_name, :last_name, :email, :address, presence: true, on: :update
 end

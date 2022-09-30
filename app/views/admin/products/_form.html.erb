@@ -32,11 +32,11 @@
                 </div>
                 <div class="form-outline form-white mb-4">
                   <%= f.label :image, class: "form-label mb-4" %>
-                  <%= f.file_field :image, required:true, autofocus: true, class: "form-control form-control-lg"%>
+                  <%= f.file_field :image, required:true, autofocus: true, autocomplete: "image", class: "form-control form-control-lg" %>
                 </div>
 
                 <div class="actions mb-4 mt-2">
-                  <%= f.submit "Create" %>
+                  <%= f.submit %>
                 </div>
               <% end %>
             </div>

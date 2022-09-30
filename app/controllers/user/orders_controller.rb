@@ -5,6 +5,7 @@ class User
   # Class Orders
   class OrdersController < ApplicationController
     before_action :current_cart
+
     def index
       @orders = Order.all
     end
@@ -20,12 +21,14 @@ class User
     end
 
     def create
-      @order = Order.new(order_params)
+      @order = current_order
+      @order.update(order_params)
       @current_cart.order_items.each do |item|
         @order.order_items << item
+        item.cart_id = nil
+        item.save
       end
-      @order.user_id = current_user.id
-      @order.save
+      @order.update_attribute(:status, 1)
       redirect_to root_path
     end
 

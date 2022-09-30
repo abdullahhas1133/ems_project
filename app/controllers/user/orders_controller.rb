@@ -29,7 +29,11 @@ class User
         item.save
       end
       @order.update_attribute(:status, 1)
-      redirect_to root_path
+      if @order.payment == 'card'
+        redirect_to user_order_path(@order)
+      else
+        redirect_to root_path
+      end
     end
 
     private

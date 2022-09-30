@@ -10,6 +10,7 @@ AllCops:
     - 'app/views/**/*'
     - 'config/environments/*'
     - 'config/initializers/devise.rb'
+    - 'config/credentials.yml.enc'
 
 # Metrics Cops
 

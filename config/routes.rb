@@ -19,5 +19,6 @@ Rails.application.routes.draw do
     resources :orders
   end
 
+  post 'payments/create', to: 'payments#create'
   resources :invitations, only: %i[new create]
 end

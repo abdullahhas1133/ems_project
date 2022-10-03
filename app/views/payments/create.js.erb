@@ -2,5 +2,5 @@ var stripe = Stripe("<%= Rails.application.credentials.config[:stripe][:stripe_p
 stripe.redirectToCheckout({
 	sessionId: '<%= @session.id %>'
 }).then(function (result) {
-  });
+});
   
